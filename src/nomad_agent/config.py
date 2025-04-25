@@ -15,9 +15,9 @@ UNSPLASH_ACCESS_KEY = os.getenv("UNSPLASH_ACCESS_KEY")
 INTERACTIVE_MODE = os.getenv("INTERACTIVE_MODE", "False").lower() == "true"
 
 # --- Model Names ---
-SUGGESTION_AGENT_MODEL = "gemini-1.5-flash-latest"
-PHASE2_MODEL_NAME = "gemini-1.5-flash-latest"
-QNA_MODEL_NAME = "gemini-1.5-flash-latest"
+SUGGESTION_AGENT_MODEL = "gemini-2.0-flash"
+PHASE2_MODEL_NAME = "gemini-2.0-flash"
+QNA_MODEL_NAME = "gemini-2.0-flash"
 EMBEDDING_MODEL_NAME = "models/text-embedding-004"
 
 # --- Vector Store ---
@@ -36,7 +36,7 @@ DEMO_PREFERENCE_ANSWERS = [
     "Mainly spa treatments and maybe some light reading by a pool.",
     "I definitely prefer warm and sunny weather.",
     "Let's go with mid-range to luxury.",
-    "Marrakech"
+    "Marrakech",
 ]
 MAX_DEMO_QUESTIONS = 2
 
@@ -45,4 +45,4 @@ RAG_N_RESULTS = 5
 RECURSION_LIMIT = 150
 TOOL_RETRY_ATTEMPTS = 2
 
-print(f"Running in {'INTERACTIVE' if INTERACTIVE_MODE else 'DEMO'} mode.") 
+print(f"Running in {'INTERACTIVE' if INTERACTIVE_MODE else 'DEMO'} mode.")

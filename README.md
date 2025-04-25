@@ -26,7 +26,7 @@ An intelligent travel recommendation system that helps users discover and plan t
 ```
 nomad-travel-agent/
 ├── .github/workflows/      # CI configuration
-├── data/                   # Data storage (gitignored)
+├── data/                   # Data storage
 ├── notebooks/             # Jupyter notebooks
 ├── src/nomad_agent/      # Main package
 │   ├── config.py         # Configuration and constants
@@ -45,7 +45,7 @@ nomad-travel-agent/
 
 1. Clone the repository:
    ```bash
-   git clone [repository-url]
+   git clone 
    cd nomad-travel-agent
    ```
 
