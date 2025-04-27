@@ -25,20 +25,20 @@ An intelligent travel recommendation system that helps users discover and plan t
 
 ```
 nomad-travel-agent/
-├── .github/workflows/      # CI configuration
-├── data/                   # Data storage
-├── notebooks/             # Jupyter notebooks
-├── src/nomad_agent/      # Main package
-│   ├── config.py         # Configuration and constants
-│   ├── data_processing.py # Data loading and processing
-│   ├── display.py        # HTML display functions
-│   ├── main.py          # Entry point
-│   ├── phase1_graph.py  # Preference gathering
-│   ├── phase2_logic.py  # City details and Q&A
-│   ├── schemas.py       # Data models
-│   ├── tools.py         # External API integrations
-│   └── vector_store.py  # ChromaDB setup
-└── scripts/              # Utility scripts
+├── .github/workflows/
+├── data/
+├── notebooks/
+├── src/nomad_agent/
+│   ├── config.py
+│   ├── data_processing.py
+│   ├── display.py
+│   ├── main.py
+│   ├── phase1_graph.py
+│   ├── phase2_logic.py
+│   ├── schemas.py
+│   ├── tools.py
+│   └── vector_store.py
+└── scripts/
 ```
 
 ## Setup Instructions
