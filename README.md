@@ -45,7 +45,7 @@ nomad-travel-agent/
 
 1. Clone the repository:
    ```bash
-   git clone 
+   git clone https://github.com/mehran-khani/Nomad-Travel-Agent.git
    cd nomad-travel-agent
    ```
 
