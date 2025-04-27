@@ -2,9 +2,9 @@ name: Lint and Format Check
 
 on:
   push:
-    branches: [ main ]
+    branches: [ mehran ]
   pull_request:
-    branches: [ main ]
+    branches: [ mehran ]
 
 jobs:
   lint-format:
