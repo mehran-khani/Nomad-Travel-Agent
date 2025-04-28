@@ -1,18 +1,16 @@
-import chromadb
-from chromadb.api.types import (
-    Documents,
-    EmbeddingFunction,
-    Embeddings as ChromaEmbeddings,
-)
-import google.genai as genai
-import google.genai.types as genai_types
 import os
 import shutil
-import pandas as pd
 import traceback
-from typing import List, Dict, Any, Optional, Tuple
-from retry import retry
+from typing import Any, Dict, List, Optional, Tuple
+
+import chromadb
 import google.api_core.exceptions
+import google.genai as genai
+import google.genai.types as genai_types
+import pandas as pd
+from chromadb.api.types import Documents, EmbeddingFunction
+from chromadb.api.types import Embeddings as ChromaEmbeddings
+from retry import retry
 
 from . import config
 from .tools import get_google_retryable_exceptions
@@ -61,7 +59,7 @@ class GeminiEmbeddingFunctionChroma(EmbeddingFunction):
                 )
             ]
         if not all(isinstance(text, str) for text in input_texts):
-            print(f"Embedder Input Error: Not all items in input_texts are strings.")
+            print("Embedder Input Error: Not all items in input_texts are strings.")
             return [[] for _ in range(len(input_texts))]
 
         try:
@@ -100,7 +98,7 @@ class GeminiEmbeddingFunctionChroma(EmbeddingFunction):
                 return embeddings_list
             else:
                 print(
-                    f"DEBUG EMBED: ERROR - Response object missing 'embeddings' list or invalid structure."
+                    "DEBUG EMBED: ERROR - Response object missing 'embeddings' list or invalid structure."
                 )
 
                 return [[] for _ in range(len(input_texts))]
@@ -234,7 +232,7 @@ def setup_chroma_db(
 
             # Filter to only process documents not already in the database
             if existing_count > 0:
-                print(f"Identifying new documents to add...")
+                print("Identifying new documents to add...")
 
                 # Get existing documents to detect duplicates
                 max_sample = min(10000, existing_count)
@@ -402,19 +400,17 @@ def setup_chroma_db(
                                     ids=batch_ids[half_batch:],
                                 )
                                 added_count += len(batch_docs)
-                                print(
-                                    f"  ✅ Successfully added with reduced batch size"
-                                )
+                                print("  ✅ Successfully added with reduced batch size")
                             except Exception as e:
                                 print(f"  ❌ Failed even with reduced batch: {e}")
-                                print(f"     Skipping this batch due to error.")
+                                print("     Skipping this batch due to error.")
                         else:
-                            print(f"     Skipping this batch due to error.")
+                            print("     Skipping this batch due to error.")
 
                         continue
 
                 # Report indexing results
-                print(f"\n✅ Indexing complete.")
+                print("\n✅ Indexing complete.")
                 print(f"   Attempted to add {len(documents_to_index)} documents.")
                 print(f"   Successfully added ~{added_count} documents in this run.")
                 final_count = poi_collection.count()
@@ -427,7 +423,7 @@ def setup_chroma_db(
                         f"   ⚠️ Warning: Final count ({final_count}) is lower than expected ({expected_count})."
                     )
                     print(
-                        f"      This could be due to errors during batch processing or duplicate documents."
+                        "      This could be due to errors during batch processing or duplicate documents."
                     )
             else:
                 print("No new documents to add.")
@@ -474,7 +470,7 @@ def retrieve_rag_documents(
             # or not query_embedding_list[0]
         ):
             print(
-                f"RAG Error: Embedder failed to return a valid embedding for the query."
+                "RAG Error: Embedder failed to return a valid embedding for the query."
             )
             return []
 

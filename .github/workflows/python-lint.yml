@@ -10,7 +10,7 @@ jobs:
   lint-format:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4 
+    - uses: actions/checkout@v4
 
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -24,7 +24,7 @@ jobs:
         pip install -r requirements.txt
 
     - name: Run flake8
-      run: flake8 src/ scripts/ --extend-ignore=E203
+      run: flake8 src/ scripts/ --extend-ignore=E203,E501
 
     - name: Run black check
       run: black --check src/ scripts/

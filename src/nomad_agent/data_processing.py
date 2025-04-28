@@ -1,7 +1,9 @@
 """Data loading and processing functions for the Nomad Travel Agent."""
 
+from typing import List, Optional, Tuple
+
 import pandas as pd
-from typing import List, Tuple, Optional
+
 from . import config
 
 

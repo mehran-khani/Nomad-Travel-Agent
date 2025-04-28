@@ -1,8 +1,9 @@
 """HTML display functions for the Nomad Travel Agent."""
 
-from typing import List, Dict, Any, Optional
 from html import escape
-from langchain_core.messages import ToolMessage, AIMessage
+from typing import Any, Dict, List, Optional
+
+from langchain_core.messages import AIMessage, ToolMessage
 
 from . import config
 
@@ -32,7 +33,7 @@ def display_recommendations_html(
         justification = escape(rec.get("justification", ""))
 
         # Get image URL from tool results
-        expected_call_id = f"{config.UNSPLASH_TOOL_NAME}_{i}_{city.replace(' ','_')}"
+        expected_call_id = f"{config.UNSPLASH_TOOL_NAME}_{i}_{city.replace(' ', '_')}"
         image_url = tool_results.get(expected_call_id, config.PLACEHOLDER_IMAGE_URL)
 
         html_parts.append(
@@ -308,7 +309,7 @@ def display_qna_answer_html(llm_answer_text: str) -> str:
     formatted_answer = escape(llm_answer_text).replace("\n", "<br>")
     return f"""
         <div style="font-family: Arial, sans-serif; max-width: 800px; margin: 20px auto;">
-            <div style="background: white; padding: 20px; border-radius: 8px; 
+            <div style="background: white; padding: 20px; border-radius: 8px;
                         border-left: 4px solid #3498db; margin-bottom: 20px;">
                 <p style="color: #34495e; margin: 0;">{formatted_answer}</p>
             </div>

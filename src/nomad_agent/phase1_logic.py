@@ -1,22 +1,20 @@
+import sys
 import traceback
-from langgraph.graph import StateGraph, END
+from functools import partial
+from typing import Any, Dict, Literal, Union
+
 from langchain_core.messages import (
-    SystemMessage,
-    HumanMessage,
     AIMessage,
-    ToolMessage,
     BaseMessage,
+    HumanMessage,
+    SystemMessage,
+    ToolMessage,
 )
 from langchain_google_genai import ChatGoogleGenerativeAI
+from langgraph.graph import END, StateGraph
 from langgraph.prebuilt import ToolNode
-from typing import Dict, Any, Literal, Union
-from functools import partial
-import sys
 
-from . import config
-from . import schemas
-from . import tools
-
+from . import config, schemas, tools
 
 suggestion_llm = None
 suggestion_llm_with_tools = None
@@ -459,7 +457,7 @@ def call_image_tool_node(state: schemas.SuggestionState) -> Dict[str, Any]:
         country = rec.get("country")
         if city:
 
-            call_id = f"{tools.UNSPLASH_TOOL_NAME}_{i}_{city.replace(' ','_').lower()}"
+            call_id = f"{tools.UNSPLASH_TOOL_NAME}_{i}_{city.replace(' ', '_').lower()}"
 
             tool_calls.append(
                 {
@@ -534,7 +532,7 @@ def format_final_output_node(state: schemas.SuggestionState) -> Dict[str, Any]:
         city = rec.get("city", "N/A")
 
         expected_call_id = (
-            f"{tools.UNSPLASH_TOOL_NAME}_{i}_{city.replace(' ','_').lower()}"
+            f"{tools.UNSPLASH_TOOL_NAME}_{i}_{city.replace(' ', '_').lower()}"
         )
         image_url = tool_results.get(expected_call_id, config.PLACEHOLDER_IMAGE_URL)
 

@@ -1,8 +1,9 @@
 """Data models and schemas for the Nomad Travel Agent."""
 
-from typing import List, Dict, Any, Optional, Annotated, TypedDict
-from pydantic import BaseModel, Field
+from typing import Annotated, Any, Dict, List, Optional, TypedDict
+
 from langchain_core.messages import BaseMessage
+from pydantic import BaseModel, Field
 
 # --- Pydantic Models ---
 # class ParsedPreference(BaseModel):

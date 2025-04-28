@@ -5,16 +5,19 @@ import os
 import shutil
 import sys
 
-project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-src_path = os.path.join(project_root, 'src')
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+src_path = os.path.join(project_root, "src")
 if src_path not in sys.path:
     sys.path.insert(0, src_path)
 
 try:
     from nomad_agent import config
 except ImportError:
-    print("ERROR: Could not import config. Make sure you are running this script from the project root directory.")
+    print(
+        "ERROR: Could not import config. Make sure you are running this script from the project root directory."
+    )
     sys.exit(1)
+
 
 def clear_chroma_cache():
     """Safely removes the ChromaDB persistent cache directory."""
@@ -30,12 +33,12 @@ def clear_chroma_cache():
         return
 
     try:
-        # --- SAFETY CONFIRMATION ---
-        confirm = input(f"Are you sure you want to permanently delete '{cache_dir}' and all its contents? (yes/no): ")
-        if confirm.lower() != 'yes':
+        confirm = input(
+            f"Are you sure you want to permanently delete '{cache_dir}' and all its contents? (yes/no): "
+        )
+        if confirm.lower() != "yes":
             print("Operation cancelled.")
             return
-        # --- END SAFETY CONFIRMATION ---
 
         print(f"Deleting directory: {cache_dir}...")
         shutil.rmtree(cache_dir)
@@ -48,7 +51,8 @@ def clear_chroma_cache():
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
 
+
 if __name__ == "__main__":
     print("--- ChromaDB Cache Reset Script ---")
     clear_chroma_cache()
-    print("--- Script Finished ---") 
+    print("--- Script Finished ---")

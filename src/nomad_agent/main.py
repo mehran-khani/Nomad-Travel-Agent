@@ -1,25 +1,28 @@
 """Main entry point for the Nomad Travel Agent."""
 
 import argparse
+import pathlib
 import sys
+import tempfile
 import traceback
-import google.genai as genai
-from langchain_core.messages import HumanMessage
 
 # --- Add imports for browser opening ---
 import webbrowser
-import tempfile
-import pathlib
+
+import google.genai as genai
+from langchain_core.messages import HumanMessage
+
+from . import (
+    config,
+    data_processing,
+    display,
+    phase1_logic,
+    phase2_logic,
+    schemas,
+    vector_store,
+)
 
 # --- End added imports ---
-
-from . import config
-from . import data_processing
-from . import vector_store
-from . import phase1_logic
-from . import phase2_logic
-from . import schemas
-from . import display
 
 
 def run_agent(interactive: bool):

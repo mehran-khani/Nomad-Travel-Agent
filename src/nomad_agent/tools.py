@@ -1,12 +1,14 @@
 """External API integrations and tools for the Nomad Travel Agent."""
 
-import requests
 import datetime
-from typing import Dict, Any, Optional
+import traceback
+from typing import Any, Dict, Optional
+
+import google.api_core.exceptions
+import requests
 from langchain_core.tools import tool
 from retry import retry
-import google.api_core.exceptions
-import traceback
+
 from . import config
 
 # --- API Error Handling ---

@@ -1,6 +1,7 @@
 """Configuration settings for the Nomad Travel Agent."""
 
 import os
+
 from dotenv import load_dotenv
 
 # Load environment variables

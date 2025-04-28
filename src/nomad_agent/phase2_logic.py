@@ -1,17 +1,15 @@
-import google.genai as genai
-from google.genai import types as genai_types
-import google.api_core.exceptions
 import json
 import traceback
-from typing import Dict, Any, Optional, List
-import chromadb
-from chromadb.api.types import EmbeddingFunction
-from pydantic import ValidationError
-from . import config
-from . import schemas
-from . import tools
-from . import vector_store
+from typing import Any, Dict, List, Optional
 
+import chromadb
+import google.api_core.exceptions
+import google.genai as genai
+from chromadb.api.types import EmbeddingFunction
+from google.genai import types as genai_types
+from pydantic import ValidationError
+
+from . import config, schemas, tools, vector_store
 
 phase2_llm_client: Optional[genai.client.Client] = None
 phase2_initialized = False
@@ -117,8 +115,6 @@ def execute_phase2(
     query_embedder: Optional[EmbeddingFunction],
 ) -> Optional[Dict[str, Any]]:
     """Orchestrates Phase 2: RAG, Weather, Grounded LLM call, Parsing."""
-    global phase2_llm_client
-
     if not phase2_initialized or phase2_llm_client is None:
         print("❌ Phase 2 Error: LLM client not initialized.")
         return None
@@ -343,7 +339,6 @@ Please generate the detailed city information (excluding weather) based on all i
 
                 temp_weather = parsed_data.pop("weather_details", None)
 
-                city_info_main = schemas.CityInformation(**parsed_data)
                 print(
                     "✅ Phase 2 main data parsed and validated against Pydantic schema."
                 )
@@ -406,7 +401,6 @@ def run_qna_session(
     query_embedder: Optional[EmbeddingFunction],
 ):
     """Runs the interactive or demo Q&A session for the selected city."""
-    global phase2_llm_client
 
     if not phase2_initialized or phase2_llm_client is None:
         print("❌ Q&A Error: LLM Client not available.")
@@ -543,7 +537,7 @@ Nomad's Answer:"""
                     "   Sorry, I encountered an issue connecting to my knowledge base."
                 )
             except Exception as qna_err:
-                print(f"\n--- ❌ Error during Q&A ---")
+                print("\n--- ❌ Error during Q&A ---")
                 print(f"Error Type: {type(qna_err).__name__}")
                 print(f"Error Details: {qna_err}")
                 traceback.print_exc()
